@@ -7,19 +7,19 @@ const initialState = {
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.ADD_PERSON:
+            const newPerson = {
+                id: Math.random(), // not really unique but good enough here!
+                name: 'Max',
+                age: Math.floor( Math.random() * 40 )
+            }
             return {
                 ...state,
-                persons: state.persons.concat( {
-                    id: Math.random(), // not really unique but good enough here!
-                    name: 'Max',
-                    age: Math.floor( Math.random() * 40 )
-                } )
+                persons: state.persons.concat( newPerson )
             }
         case actionTypes.DELETE_PERSON:
-            const updatedArray = state.persons.filter( person => person.id !== action.personElId );
             return {
                 ...state,
-                persons: updatedArray
+                persons: state.persons.filter( person => person.id !== action.personId )
             }
         default:
             return state
